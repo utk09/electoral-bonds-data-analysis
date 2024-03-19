@@ -67,22 +67,34 @@ def display_encasher_details():
 
 def display_about():
     st.write("""
-        ## About This Analysis
+        ## Introduction
 
-        This Streamlit application is designed to analyze and visualize electoral bond data.
-        Users can switch between different types of analyses such as Purchaser Details Analysis and Encasher Details Analysis.
+        Electoral Bonds are a financial instrument for making donations to political parties. These bonds are issued by the Reserve Bank of India and can be purchased by any person or company incorporated in India. These bonds can be donated to any eligible political party, which has secured at least 1% of the votes polled in the most recent Lok Sabha or State election. The identity of the donor is not disclosed to the receiver or the public. The bonds are redeemable within 15 days and can be encashed by an eligible political party only through a designated bank account with the State Bank of India.
+
+        ## Objective
+
+        With the latest landmark decision by Hon'ble Supreme Court of India to make the details of Electoral Bonds public, the objective of this project is to analyze the data and understand the trends and patterns of donations to political parties through Electoral Bonds.
+
+        ## Analysis
+
+        The biggest hurdle in this analysis is the data being available in the form of PDFs. The data has been extracted from the PDFs and converted to CSV format for analysis. The GitHub repository for this project contains the code for extracting the data from PDFs.
+
+        ## Data
+
+        The data is obtained from the [Election Commision of India](https://www.eci.gov.in/disclosure-of-electoral-bonds) website. The data is available in the form of PDFs.
 
         ### How to Use:
+
         - Select the analysis you want to view using the options on the sidebar.
         - Interact with the visuals or tables presented for deeper insights.
 
-        ### Data Details:
-        The analyses include unique purchaser count, total denomination by purchaser, and temporal denomination summaries.
+        ### Contribute to the Project:
 
-        ### Run the App:
-        To run this app, use the command: `streamlit run main.py`.
+        - The source code for this project is available on [GitHub](https://github.com/utk09/electoral-bonds-data-analysis)
+        - Detailed README is available here: [README](https://github.com/utk09/electoral-bonds-data-analysis/blob/main/README.md)
+        - Feel free to contribute to the project by opening an issue or a pull request.
+        - If you have any other analysis ideas, please open an issue and we can discuss it.
 
-        For more information on electoral bonds, visit [Electoral Commission's website](https://www.eci.gov.in/disclosure-of-electoral-bonds).
     """)
     st.write("---")
 
