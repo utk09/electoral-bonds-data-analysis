@@ -52,7 +52,8 @@ def display_purchaser_details():
     st.plotly_chart(fig_monthly)
     st.write("---")
     names = st.text_input(
-        "Enter names of purchasers, comma separated, to view their history", key='purchaser_name')
+        "Enter names of purchasers, comma separated, to view their history", "FUTURE GAMING AND HOTEL SERVICES PR,QWIKSUPPLYCHAINPRIVATELIMITED", placeholder="FUTURE GAMING AND HOTEL SERVICES PR,QWIKSUPPLYCHAINPRIVATELIMITED",
+        key='purchaser_name',)
     if names:
         names = names.strip().split(',')
         st.plotly_chart(plot_graph_of_purchasers(names))
