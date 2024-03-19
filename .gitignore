@@ -1,0 +1,12 @@
+# Env files
+electoralbonds/
+electoralbonds/__pycache__
+.env
+
+# Temp Directories
+ABC.zip
+ABC/
+
+.DS_Store
+.vscode/
+__pycache__/
