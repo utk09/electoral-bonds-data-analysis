@@ -37,7 +37,7 @@ The analysis will be performed using Python and the following libraries:
 - Clone the repository:
 
 ```bash
-git clone
+git clone https://github.com/utk09/electoral-bonds-data-analysis.git
 ```
 
 - Create a virtual environment and install the dependencies:
