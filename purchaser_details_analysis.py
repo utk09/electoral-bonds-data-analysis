@@ -6,7 +6,7 @@ import plotly.express as px
 
 
 @st.cache_data
-def load_data(file_name):
+def load_data_purchaser(file_name):
     data = pd.read_csv(file_name)
     data['Date of Purchase'] = pd.to_datetime(
         data['Date of Purchase'], format='%d/%b/%Y')
@@ -45,11 +45,11 @@ def analyze_purchaser_sum(df):
     return result
 
 
-def sum_denomination_year(df):
+def sum_denomination_year_purchaser(df):
     return df.groupby('Year')['Denomination'].sum().reset_index()
 
 
-def sum_denomination_month(df):
+def sum_denomination_month_purchaser(df):
     monthly_sum = df.groupby('Month-Year')['Denomination'].sum().reset_index()
     monthly_sum['Month-Year'] = pd.to_datetime(
         monthly_sum['Month-Year'], format='%b %Y')
@@ -59,7 +59,7 @@ def sum_denomination_month(df):
 
 def plot_graph_of_purchasers(purchasers_list):
     # take a list of purchasers, and plot a graph of their purchases over time
-    df = load_data(file_name='./01_Purchaser_Details.csv')
+    df = load_data_purchaser(file_name='./01_Purchaser_Details.csv')
     st.write(purchasers_list)
     df = df[df['Purchaser Name'].isin(purchasers_list)]
     st.dataframe(df, hide_index=True)

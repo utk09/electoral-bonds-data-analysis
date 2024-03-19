@@ -1,8 +1,10 @@
 import streamlit as st
 import plotly.express as px
 import pandas as pd
-from purchaser_details_analysis import (load_data, analyze_purchasers, analyze_purchaser_sum,
-                                        sum_denomination_year, sum_denomination_month, plot_graph_of_purchasers)
+from purchaser_details_analysis import (load_data_purchaser, analyze_purchasers, analyze_purchaser_sum,
+                                        sum_denomination_year_purchaser, sum_denomination_month_purchaser, plot_graph_of_purchasers)
+from encasher_details_analysis import (load_data_encasher, analyze_encashers, analyze_encasher_sum,
+                                       sum_denomination_year_encasher, sum_denomination_month_encasher, plot_graph_of_encashers)
 
 
 def display_purchaser_details():
@@ -16,7 +18,8 @@ def display_purchaser_details():
     pd_df = pd.read_csv('./01_Purchaser_Details.csv')
     st.dataframe(pd_df, hide_index=True)
     st.write("---")
-    df = load_data(file_name='./01_Purchaser_Details.csv')  # Load data
+    df = load_data_purchaser(
+        file_name='./01_Purchaser_Details.csv')  # Load data
     st.write(f"#### Number of Unique Purchasers: {analyze_purchasers(df)[0]}")
     st.write(f"#### Mean Denomination: ₹ {analyze_purchasers(df)[1]}")
     st.write(f"#### Median Denomination: ₹ {analyze_purchasers(df)[2]}")
@@ -39,30 +42,79 @@ def display_purchaser_details():
     st.write(analyze_purchaser_sum(df))
     st.write("---")
     st.subheader('Sum of Purchases (Denomination) by Year')
-    yearly_sum = sum_denomination_year(df)
+    yearly_sum = sum_denomination_year_purchaser(df)
     fig_yearly = px.line(yearly_sum, x='Year', y='Denomination',
                          title='Sum of Denomination per Year', markers=True)
     st.plotly_chart(fig_yearly)
     st.write("---")
 
     st.subheader('Sum of Purchases (Denomination) by Month-Year')
-    monthly_sum = sum_denomination_month(df)
+    monthly_sum = sum_denomination_month_purchaser(df)
     fig_monthly = px.line(monthly_sum, x='Month-Year', y='Denomination',
                           title='Sum of Denomination per Month', markers=True)
     st.plotly_chart(fig_monthly)
     st.write("---")
-    names = st.text_input(
-        "Enter names of purchasers, comma separated, to view their history", "FUTURE GAMING AND HOTEL SERVICES PR,QWIKSUPPLYCHAINPRIVATELIMITED", placeholder="FUTURE GAMING AND HOTEL SERVICES PR,QWIKSUPPLYCHAINPRIVATELIMITED",
+    purchaser_names = st.text_input(
+        "Enter names of purchasers, pipe separated (|), to view their history", "FUTURE GAMING AND HOTEL SERVICES PR | QWIKSUPPLYCHAINPRIVATELIMITED", placeholder="FUTURE GAMING AND HOTEL SERVICES PR | QWIKSUPPLYCHAINPRIVATELIMITED",
         key='purchaser_name',)
-    if names:
-        names = names.strip().split(',')
-        st.plotly_chart(plot_graph_of_purchasers(names))
+    if purchaser_names:
+        purchaser_names = [x.strip() for x in purchaser_names.split('|')]
+        st.plotly_chart(plot_graph_of_purchasers(purchaser_names))
 
 
 def display_encasher_details():
     # Placeholder for Encasher Details Analysis
     st.write("## Encasher Details Analysis")
-    st.write("This section is under development.")
+    st.write(
+        "This section analyzes the details of encashers who encashed electoral bonds.")
+    st.write("---")
+    st.write("### CSV Dataset")
+    st.write(
+        "The dataset used for this analysis is the `02_Encasher_Details.csv` file.")
+    pd_df = pd.read_csv('./02_Encasher_Details.csv')
+    st.dataframe(pd_df, hide_index=True)
+    st.write("---")
+    df = load_data_encasher(file_name='./02_Encasher_Details.csv')  # Load data
+    st.write(
+        f"#### Number of Unique Encashers: {analyze_encashers(df)[0]}")
+    st.write(f"#### Mean Denomination: ₹ {analyze_encashers(df)[1]}")
+    st.write(f"#### Median Denomination: ₹ {analyze_encashers(df)[2]}")
+    st.write(
+        f"#### 1st Quantile of Denomination: ₹ {analyze_encashers(df)[3]}")
+    st.write(
+        f"#### 3rd Quantile of Denomination: ₹ {analyze_encashers(df)[4]}")
+    st.write(
+        f"#### Interquantile Range of Denomination: ₹ {analyze_encashers(df)[5]}")
+    st.write(f"#### Quantiles over all data:")
+    st.table(analyze_encashers(df)[6])
+    st.write(
+        f"Read more about Quartiles [here](https://stats.stackexchange.com/questions/156778/percentile-vs-quantile-vs-quartile)")
+    st.write(
+        f"Quantiles are a measure of dispersion or spread of a set of data values. They divide the data set into four equal parts. Read about pandas.quantile [here](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.quantile.html)")
+    st.write("---")
+    st.subheader(
+        'Sum of Encashments (Denomination) grouped by Encasher Name, along with Dates of Encashment')
+    st.write(analyze_encasher_sum(df))
+    st.write("---")
+    st.subheader('Sum of Encashments (Denomination) by Year')
+    yearly_sum = sum_denomination_year_encasher(df)
+    fig_yearly = px.line(yearly_sum, x='Year', y='Denomination',
+                         title='Sum of Denomination per Year', markers=True)
+    st.plotly_chart(fig_yearly)
+    st.write("---")
+
+    st.subheader('Sum of Encashments (Denomination) by Month-Year')
+    monthly_sum = sum_denomination_month_encasher(df)
+    fig_monthly = px.line(monthly_sum, x='Month-Year', y='Denomination',
+                          title='Sum of Denomination per Month', markers=True)
+    st.plotly_chart(fig_monthly)
+    st.write("---")
+    encasher_names = st.text_input(
+        "Enter names of encashers, pipe separated(|), to view their history", "JAMMU AND KASHMIR NATIONAL CONFERENCE | JHARKHAND MUKTI MORCHA", placeholder="BHARTIYA JANTA PARTY | PRESIDENT, ALL INDIA CONGRESS COMMITTEE",
+        key='encasher_name',)
+    if encasher_names:
+        encasher_names = [x.strip() for x in encasher_names.split('|')]
+        st.plotly_chart(plot_graph_of_encashers(encasher_names))
 
 
 def display_about():
