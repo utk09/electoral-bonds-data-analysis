@@ -26,6 +26,8 @@ def load_data_encasher(file_name):
 def analyze_encashers(df):
     # number of unique encashers
     unique_encashers = df['Name of the Political Party'].nunique()
+    # sum of denomination
+    total_denomination = df['Denomination'].sum()
     # Mean, Median, Mode
     mean = df['Denomination'].mean()
     median = df['Denomination'].median()
@@ -39,7 +41,7 @@ def analyze_encashers(df):
     qd = df.quantile([.25, 0.50, 0.75], method="table",
                      interpolation="nearest", numeric_only=False)
     # Return results
-    return unique_encashers, mean, median, q1, q3, iqr, qd
+    return unique_encashers, total_denomination, mean, median, q1, q3, iqr, qd
 
 
 def analyze_encasher_sum(df):

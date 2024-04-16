@@ -20,17 +20,20 @@ def display_purchaser_details():
     st.write("---")
     df = load_data_purchaser(
         file_name='./01_Purchaser_Details.csv')  # Load data
-    st.write(f"#### Number of Unique Purchasers: {analyze_purchasers(df)[0]}")
-    st.write(f"#### Mean Denomination: ₹ {analyze_purchasers(df)[1]}")
-    st.write(f"#### Median Denomination: ₹ {analyze_purchasers(df)[2]}")
     st.write(
-        f"#### 1st Quantile of Denomination: ₹ {analyze_purchasers(df)[3]}")
+        f"#### Number of Unique Purchasers: :blue[{analyze_purchasers(df)[0]}]")
     st.write(
-        f"#### 3rd Quantile of Denomination: ₹ {analyze_purchasers(df)[4]}")
+        f"#### Total Denomination: :red[₹ {analyze_purchasers(df)[1]}] :green[(twelve thousand one hundred fifty-five crores and fifty-one lakhs thirty-two thousand)]")
+    st.write(f"#### Mean Denomination: :orange[₹ {analyze_purchasers(df)[2]}]")
+    st.write(f"#### Median Denomination: ₹ {analyze_purchasers(df)[3]}")
     st.write(
-        f"#### Interquantile Range of Denomination: ₹ {analyze_purchasers(df)[5]}")
+        f"#### 1st Quantile of Denomination: ₹ {analyze_purchasers(df)[4]}")
+    st.write(
+        f"#### 3rd Quantile of Denomination: ₹ {analyze_purchasers(df)[5]}")
+    st.write(
+        f"#### Interquantile Range of Denomination: ₹ {analyze_purchasers(df)[6]}")
     st.write(f"#### Quantiles over all data:")
-    st.table(analyze_purchasers(df)[6])
+    st.table(analyze_purchasers(df)[7])
     st.write(
         f"Read more about Quartiles [here](https://stats.stackexchange.com/questions/156778/percentile-vs-quantile-vs-quartile)")
     st.write(
@@ -76,17 +79,19 @@ def display_encasher_details():
     st.write("---")
     df = load_data_encasher(file_name='./02_Encasher_Details.csv')  # Load data
     st.write(
-        f"#### Number of Unique Encashers: {analyze_encashers(df)[0]}")
-    st.write(f"#### Mean Denomination: ₹ {analyze_encashers(df)[1]}")
-    st.write(f"#### Median Denomination: ₹ {analyze_encashers(df)[2]}")
+        f"#### Number of Unique Encashers: :blue[{analyze_encashers(df)[0]}]")
     st.write(
-        f"#### 1st Quantile of Denomination: ₹ {analyze_encashers(df)[3]}")
+        f"#### Total Denomination: :red[₹ {analyze_encashers(df)[1]}] :green[(twelve thousand seven hundred sixty-nine crores and eight lakhs ninety-three thousand)]")
+    st.write(f"#### Mean Denomination: :orange[₹ {analyze_encashers(df)[2]}]")
+    st.write(f"#### Median Denomination: ₹ {analyze_encashers(df)[3]}")
     st.write(
-        f"#### 3rd Quantile of Denomination: ₹ {analyze_encashers(df)[4]}")
+        f"#### 1st Quantile of Denomination: ₹ {analyze_encashers(df)[4]}")
     st.write(
-        f"#### Interquantile Range of Denomination: ₹ {analyze_encashers(df)[5]}")
+        f"#### 3rd Quantile of Denomination: ₹ {analyze_encashers(df)[5]}")
+    st.write(
+        f"#### Interquantile Range of Denomination: ₹ {analyze_encashers(df)[6]}")
     st.write(f"#### Quantiles over all data:")
-    st.table(analyze_encashers(df)[6])
+    st.table(analyze_encashers(df)[7])
     st.write(
         f"Read more about Quartiles [here](https://stats.stackexchange.com/questions/156778/percentile-vs-quantile-vs-quartile)")
     st.write(
@@ -148,6 +153,11 @@ def display_about():
         - If you have any other analysis ideas, please open an issue and we can discuss it.
 
     """)
+    st.write("---")
+
+    st.write("### Notes and Observations about the data:")
+    st.write(
+        f"""##### The difference in total denominations between :orange[encashers] and :orange[purchasers] (₹127,690,893,000 - ₹121,555,132,000) is: :red[₹613,57,61,000] :green[(six hundred thirteen crores fifty-seven lakhs sixty-one thousand)]. This indicates that data regarding the :red[purchasers of bonds] worth over ₹600 crores remains :red[unidentified].""")
     st.write("---")
 
 

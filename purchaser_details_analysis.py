@@ -19,6 +19,8 @@ def load_data_purchaser(file_name):
 def analyze_purchasers(df):
     # number of unique purchasers
     unique_purchasers = df['Purchaser Name'].nunique()
+    # sum of denominations
+    sum_denomination = df['Denomination'].sum()
     # Mean, Median, Mode
     mean = df['Denomination'].mean()
     median = df['Denomination'].median()
@@ -32,7 +34,7 @@ def analyze_purchasers(df):
     qd = df.quantile([.25, 0.50, 0.75], method="table",
                      interpolation="nearest", numeric_only=False)
     # Return results
-    return unique_purchasers, mean, median, q1, q3, iqr, qd
+    return unique_purchasers, sum_denomination, mean, median, q1, q3, iqr, qd
 
 
 def analyze_purchaser_sum(df):
